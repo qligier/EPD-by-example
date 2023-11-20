@@ -54,7 +54,7 @@ The SOAP *Header* element shall convey the following information:
 
 Optional elements may be included according to the specification in the **[W3C SOAP specification](https://www.w3.org/TR/2007/REC-soap12-part0-20070427/#L26866)**.
 
-```
+```xml
 1 <env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope">
 2  <env:Header>
 3   <wsa:To xmlns:wsa="http://www.w3.org/2005/08/addressing">
@@ -79,7 +79,7 @@ Primary systems shall set the following values:
 - *sender* : The OID of the sender application initiating the request.
 - *receiver*: The OID of the receiver application which shall respond to the request.
 
-```
+```xml
 2  <env:Body>
 13   <PRPA_IN201309UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0">
 14    <id extension="1694523036420" root="1.3.6.1.4.1.21367.2017.2.7.141"/>
@@ -104,7 +104,7 @@ The query parameter are encoded in a HL7 V3 *controlActProcess* element of the m
 
 - *authorOrPerformer*: The OID of the primary system in the *id* element.
 
-```
+```xml
 30    <controlActProcess classCode="CACT" moodCode="EVN">
 31     <code code="PRPA_TE201309UV02" displayName="2.16.840.1.113883.1.18"/>
 32     <authorOrPerformer typeCode="AUT">
@@ -121,7 +121,7 @@ The query parameter are conveyed in the *queryByParameter* child element:
 - *dataSource*: The OID of the assigning authority of the EPR-SPID (line 46).
 - *patientIdentifier*: The ID of the patient data in the primary system, with the OID of the primary system in the *root* element and the local ID in the *extension* element.
 
-```
+```xml
 37     <queryByParameter>
 38      <queryId extension="1694523036421" root="1.3.6.1.4.1.21367.2017.2.7.141"/>
 39      <statusCode code="new"/>
@@ -157,7 +157,7 @@ The SOAP *Header* element shall conveys the following information:
 - *Action* element: The SOAP action identifier of the request as defined in the IHE ITI Technical Framework.
 - *RelatesTo* element: A copy of the unique ID of the query request.
 
-```
+```xml
 1 <soapenv:Envelope xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope">
 2   <soapenv:Header xmlns:wsa="http://www.w3.org/2005/08/addressing">
 3     <wsa:Action xmlns:mustUnderstand="http://www.w3.org/2003/05/soap-envelope" mustUnderstand:mustUnderstand="1">urn:hl7-org:v3:PRPA_IN201310UV02</wsa:Action>
@@ -174,7 +174,7 @@ The *patient* child element conveys the master patient ID (XAD-SPID) and the EPR
 - *id* : The master patient ID (XAD-SPID), with the community OID as the assigning authority in the *root* and the ID in the *extension* attribute (line 49).
 - *id* : The EPR-SPID, with the OID of the ZAS as assigning authority in the *root* and the ID in the *extension* attribute (line 50).
 
-```
+```xml
 44           <ns1:registrationEvent classCode="REG" moodCode="EVN">
 45             <ns1:id xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" nullFlavor="NA" xsi:type="ns1:II"/>
 46             <ns1:statusCode code="active"/>
@@ -192,7 +192,7 @@ The *patient* child element conveys the master patient ID (XAD-SPID) and the EPR
 
 The *custodian* child element conveys information on the responding system with the the OID of the provider organization in the *id* child element as follows:
 
-```
+```xml
 57             <ns1:custodian typeCode="CST">
 58               <ns1:assignedEntity classCode="ASSIGNED">
 59                 <ns1:id xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" extension="MyOrgID" root="1.3.6.1.4.1.21367.2010.1.2.600" xsi:type="ns1:II"/>
@@ -209,7 +209,7 @@ The *custodian* child element conveys information on the responding system with 
 
 The primary system shall send the request messages to the registry of the community using the http POST binding as defined in the **[W3C SOAP specification](https://www.w3.org/TR/2007/REC-soap12-part0-20070427/#L26866)**. It may look like:
 
-```
+```http
 POST /PIXV3QueryService HTTP/1.1
 Host: company.example.org
 Accept-Encoding: gzip, deflate
@@ -228,7 +228,7 @@ specified in the **[IHE ITI TF](https://ehealthsuisse.ihe-europe.net/gss/audit-m
 
 The following snippet shows a example audit message to be written by the primary system:
 
-```
+```xml
 1 <?xml version='1.0' encoding='utf-8'?>
 2 <AuditMessage>
 3  <EventIdentification EventActionCode="E" EventDateTime="2020-09-30T19:32:55.368Z" EventOutcomeIndicator="0">
