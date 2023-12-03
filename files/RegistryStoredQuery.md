@@ -1,7 +1,7 @@
 # Registry Stored Query
 Transaction to lookup the document metadata for the documents stored in a patient's EPR. Primary systems shall use this transaction to view the metadata of the available documents for to display the data in the UI.   
 
-# Overview
+## Overview
 
 Primary systems shall use this transaction to retrieve the document metadata for the documents stored in a patients EPR.
 In the Swiss EPR the **[IHE XDS.b](https://profiles.ihe.net/ITI/TF/Volume1/ch-10.html)** profile and transactions shall
@@ -17,14 +17,14 @@ The community responds with the metadata sets of all documents registered in the
 and filter parameter of the query. The profile is based upon the **[ebXML](http://www.ebxml.org)** standard. Due to the
 genericity of the ebXML standard, the response is not human readable and needs without background information given below.
 
-# Transaction
+## Transaction
 
-## Message Semantics
+### Message Semantics
 
 Messages are encoded as described in the **[ebXML](http://www.ebxml.org)** standard with restrictions defined in the IHE
 profile and the ordinances to the Swiss EPR.
 
-### Request Message
+#### Request Message
 
 The following snippet is taken from a sample request recorded during the EPR projectathon in September 2020. Some elements
 were omitted to increase readability. The raw request file may be found **[here](https://github.com/ehealthsuisse/EPD-by-example/tree/main/samples/ITI-18_request_raw.xml)**.
@@ -77,7 +77,7 @@ The SOAP *Body* element conveys the *AdhocQuery* (lines 15 to 26 below) with the
 29 </soapenv:Envelope>
 ```
 
-### Response Message
+#### Response Message
 
 *TODO* add the originalProvider to the response message.
 
@@ -101,7 +101,7 @@ A request message is quite lengthy. A listing with abrevations used in the step 
 **[here](https://github.com/ehealthsuisse/EPD-by-example/tree/main/samples/ITI-18_response.xml)**. The raw version of the message may
 be found **[here](https://github.com/ehealthsuisse/EPD-by-example/tree/main/samples/ITI-18_response_raw.xml)**.
 
-### Message Interpretation
+#### Message Interpretation
 
 The response message is not very complex, but quite lengthy due to the genericity of the ebXML standard.
 Therefore the following step by step interpretation may be of help to interpret the response.
@@ -282,7 +282,7 @@ value must be used when retrieving documents to display (see **[Retrieve Documen
 - The master patient ID (XAD-SPID): The value conveyed with the *value* attribute conveys the master patient ID (XAD-SPID)
 in the repository. Its value must be used when retrieving documents to display (see **[Retrieve Document Set](RetrieveDocumentSet.md)**).
 
-## Transport Protocol
+### Transport Protocol
 
 The primary system shall send the request messages to the registry of the community using the http POST binding as defined
 in the **[W3C SOAP specification](https://www.w3.org/TR/2007/REC-soap12-part0-20070427/#L26866)**. It may look like:  
@@ -296,7 +296,7 @@ Content-Type: application/soap+xml; charset="utf-8"
 Content-Length: nnnn  
 ```
 
-## Audit Log
+### Audit Log
 
 Primary systems shall store syslog messages to the audit record repository of the community using TLS transport protocol.
 The audit message uses XML formatting as specified in **[RFC 3881](https://tools.ietf.org/html/rfc3881)** with restrictions
@@ -350,7 +350,7 @@ The message is made of the following blocks:
 - *ParticipantObjectIdentification*: Request message related information including a UUencoded copy of the query.
 - *ParticipantObjectIdentification*: Information on the patients EPR accessed and the base64 encoded query (ommitted for brevity).
 
-# Security Requirements    
+### Security Requirements    
 
 To ensure privacy the transaction must be secured using https with mutual authentication, using X.509 certificates (extended
 validation required) and client and server side certificate validation.
@@ -362,6 +362,6 @@ Note:
 - Some test environments dropped the mutual authentication or TLS for testing purposes. Please contact your test system provider on the details.
 - Some test environments may also drop authorization for testing purposes. Please contact your test system provider on the details.  
 
-# Test Opportunity
+## Test Opportunity
 
 The transaction can be tested with the test suite of the **[EPR reference environment](gazelle.md)**, test systems of the EPR communities or the **[EPR Playground](playground.md)**.
