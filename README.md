@@ -44,6 +44,10 @@ Please see section below for details on the available public test systems.
 
 **[Provide X-User Assertion](../main/files/ProvideXAssertion.md)** - Use SAML 2.0 Assertion in transactions to authorize access
 
+## Logging
+
+**[Audit messages](../main/files/Atna.md)** - Provide audit messages
+
 ## Public Test Systems
 
 **[EPR Playground](../main/files/playground.md)** - Public available test system to test transaction messages and complex use cases.
